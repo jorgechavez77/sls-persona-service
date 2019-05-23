@@ -1,0 +1,16 @@
+service: sls-data-service
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+functions:
+  createPersona:
+    handler: src/handler.createPersona
+    events:
+      - http:
+          path: personas
+          method: post
+
+plugins:
+  - serverless-offline
