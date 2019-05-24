@@ -1,3 +1,6 @@
 node_modules
 yarn.lock
 .env
+
+// I prefer using prettier, but I am ignoring it for git in case you have a different configuration
+.prettierrc
