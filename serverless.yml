@@ -12,5 +12,12 @@ functions:
           path: personas
           method: post
 
+  updatePersona:
+    handler: src/handler.updatePersona
+    events:
+      - http:
+          path: personas/{id}
+          method: put
+
 plugins:
   - serverless-offline
