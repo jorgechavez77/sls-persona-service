@@ -1,8 +1,13 @@
 service: sls-data-service
 
+custom:
+  MONGO_URI: mongodb://127.0.0.1:27017/gorditos
+
 provider:
   name: aws
   runtime: nodejs8.10
+  environment:
+    MONGO_URI: ${self:custom.MONGO_URI}
 
 functions:
   createPersona:
@@ -11,6 +16,12 @@ functions:
       - http:
           path: personas
           method: post
+  findPersona:
+    handler: src/handler.findPersona
+    events:
+      - http:
+          path: personas/{id}
+          method: get
 
 plugins:
   - serverless-offline
