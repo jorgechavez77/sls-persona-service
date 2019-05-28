@@ -40,3 +40,34 @@ module.exports.findPersona = async event => {
     }
   }
 }
+
+exports.updatePersona = async event => {
+  const { id } = event.pathParameters
+  const data = JSON.parse(event.body)
+
+  try {
+    const resp = await repo.updatePersona(id, data)
+    const result = JSON.parse(resp)
+    console.log(result)
+    const response = {}
+    if(result.nModified === 1) {
+      response.message = "Resource updated successfully"
+    } else {
+      response.message = "Resource not updated"
+    }
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: response.message 
+      })
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: error.message,
+      }),
+    }
+  }
+}

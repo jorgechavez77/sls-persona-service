@@ -11,3 +11,8 @@ exports.findPersona = async (id) => {
   const db = await client.getDB()
   return db.collection('persona').findOne({ _id: ObjectID(id) })
 }
+
+exports.updatePersona = async (id, data) => {
+  const db = await client.getDB()
+  return db.collection('persona').updateOne({ _id: ObjectID(id) }, {$set:{data}}, {upsert:false})
+}
