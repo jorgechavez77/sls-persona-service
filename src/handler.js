@@ -21,7 +21,7 @@ exports.createPersona = async event => {
   }
 }
 
-module.exports.findPersona = async event => {
+exports.findPersona = async event => {
   const { id } = event.pathParameters
 
   try {

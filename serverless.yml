@@ -1,7 +1,7 @@
 service: sls-data-service
 
 custom:
-  MONGO_URI: mongodb://127.0.0.1:27017/gorditos
+  MONGO_URI: ${env:MONGO_URI}
 
 provider:
   name: aws
@@ -32,3 +32,4 @@ functions:
 
 plugins:
   - serverless-offline
+  - serverless-dotenv-plugin
