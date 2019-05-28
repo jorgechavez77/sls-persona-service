@@ -41,7 +41,7 @@ module.exports.findPersona = async event => {
   }
 }
 
-module.exports.updatePersona = async event => {
+exports.updatePersona = async event => {
   const { id } = event.pathParameters
   const data = JSON.parse(event.body)
 
