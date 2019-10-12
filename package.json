@@ -4,7 +4,8 @@
   "description": "Data CRUD",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
     "start": "sls offline"
   },
   "repository": {
@@ -22,7 +23,9 @@
     "mongodb": "^3.2.5"
   },
   "devDependencies": {
+    "@types/jest": "^24.0.18",
     "babel-eslint": "^10.0.1",
+    "jest": "^24.9.0",
     "serverless": "^1.42.2",
     "serverless-dotenv-plugin": "^2.1.1",
     "serverless-offline": "^4.10.0",
