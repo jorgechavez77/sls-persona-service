@@ -1,22 +1,21 @@
 const repo = require('./repository')
 
 exports.createPersona = async event => {
-  const data = JSON.parse(event.body)
+  const data = event.body
   try {
     const id = await repo.createPersona(data)
-    console.debug({ id })
     const resp = await repo.findPersona(id)
     return {
       statusCode: 201,
-      body: JSON.stringify(resp),
+      body: resp,
     }
   } catch (error) {
     console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        message: error.message,
-      }),
+      body: {
+        message: error,
+      },
     }
   }
 }
@@ -28,46 +27,44 @@ exports.findPersona = async event => {
     const resp = await repo.findPersona(id)
     return {
       statusCode: 201,
-      body: JSON.stringify(resp),
+      body: resp,
     }
   } catch (error) {
     console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify({
-        message: error.message,
-      }),
+      body: {
+        message: error,
+      },
     }
   }
 }
 
 exports.updatePersona = async event => {
   const { id } = event.pathParameters
-  const data = JSON.parse(event.body)
+  const data = event.body
 
   try {
-    const resp = await repo.updatePersona(id, data)
-    const result = JSON.parse(resp)
-    console.log(result)
+    const result = await repo.updatePersona(id, data)
     const response = {}
-    if(result.nModified === 1) {
+    if (result.nModified === 1) {
       response.message = "Resource updated successfully"
     } else {
       response.message = "Resource not updated"
     }
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: response.message 
-      })
+      body: {
+        message: response.message
+      }
     }
   } catch (error) {
     console.error(error)
     return {
       statusCode: 500,
-      body: JSON.stringify({
+      body: {
         message: error.message,
-      }),
+      },
     }
   }
 }
