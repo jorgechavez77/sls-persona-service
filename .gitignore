@@ -1,4 +1,5 @@
-node_modules
+node_modules/
+coverage/
 .env
 
 // I prefer using prettier, but I am ignoring it for git in case you have a different configuration
