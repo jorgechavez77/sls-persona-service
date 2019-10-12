@@ -49,6 +49,7 @@ describe(`handler`, () => {
       const result = await handler.findPersona(event)
 
       // it should
+      expect(repo.findPersona).toHaveBeenCalledWith(123)
       expect(result).toEqual({
         statusCode: 201,
         body: {
@@ -78,10 +79,38 @@ describe(`handler`, () => {
       const result = await handler.updatePersona(event)
 
       // then it should
+      expect(repo.updatePersona).toHaveBeenCalledWith(123, { foo: 'baz' })
       expect({
         statusCode: 200,
         body: {
           message: "Resource updated successfully"
+        }
+      })
+    })
+
+    test(`should complete not updated path`, async () => {
+      // given
+      const event = {
+        pathParameters: {
+          id: 125
+        },
+        body: {
+          foo: 'baz'
+        }
+      }
+      repo.updatePersona = jest.fn().mockResolvedValueOnce({
+        nModified: 0
+      })
+
+      // when
+      const result = await handler.updatePersona(event)
+
+      // then it should
+      expect(repo.updatePersona).toHaveBeenCalledWith(125, { foo: 'baz' })
+      expect({
+        statusCode: 200,
+        body: {
+          message: "Resource not updated"
         }
       })
     })
